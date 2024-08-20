@@ -20,7 +20,6 @@ export function NoteForm({ onSubmit }: NoteFormProps) {
             markdown: markdownRef.current!.value,
             tags: []
         })
-        }
     }
 
     return (
@@ -36,7 +35,9 @@ export function NoteForm({ onSubmit }: NoteFormProps) {
                     <Col>
                         <Form.Group controlId={"tags"}>
                             <Form.Label>Tags</Form.Label>
-                            <CreatableReactSelect isMulti />
+                            <CreatableReactSelect value={selectedTags.map(tag => {
+                                return { value: tag.id, label: tag.label }
+                            })} isMulti />
                         </Form.Group>
                     </Col>
                 </Row>
