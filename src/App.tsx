@@ -1,11 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css"
-import {Navigate, Route, Routes} from "react-router-dom";
-import {Container} from "react-bootstrap";
-import {NewNote} from "./NewNote.tsx";
+import {Navigate, Route, Routes} from "react-router-dom"
+import {Container} from "react-bootstrap"
+import {NewNote} from "./NewNote.tsx"
 
 export type Note = {
     id: string
 } & NoteData
+
+export type RawNote = {
+    id: string
+} & RawNoteData
+
+export type RawNoteData = {
+    title: string
+    markdown: string
+    tagIds: string[]
+}
 
 export type NoteData = {
     title: string
@@ -19,8 +29,10 @@ export type Tag = {
 }
 
 function App() {
+    const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", [])
+    const [tags, setTagss] = useLocalStorage<Tag[]>("TAGS", [])
 
-  return (
+    return (
       <Container className="my-4">
         <Routes>
           <Route path="/" element={<h1>Home</h1>} />
@@ -32,7 +44,7 @@ function App() {
           <Route path="*" element={<Navigate to={"/"}/>} />
         </Routes>
       </Container>
- )
+    )
 }
 
 export default App
