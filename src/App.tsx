@@ -6,6 +6,7 @@ import {useLocalStorage} from "./useLocalStorage.ts"
 import {useMemo} from "react"
 import {v4 as uuidV4} from "uuid"
 import {NoteList} from "./NoteList.tsx"
+import {NoteLayout} from "./NoteLayout.tsx";
 
 export type Note = {
     id: string
@@ -60,7 +61,7 @@ function App() {
         <Routes>
           <Route path="/" element={<NoteList notes={notesWithTags} availableTags={tags}/>} />
           <Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags}/>} />
-          <Route path="/:id">
+          <Route path="/:id" element={<NoteLayout notes={notesWithTags} />} >
             <Route index element={<h1>Show</h1>}/>
             <Route path={"edit"} element={<h1>Edit</h1>}/>
           </Route>
