@@ -4,6 +4,7 @@ import ReactSelect from "react-select"
 import {useMemo, useState} from "react"
 import {Tag} from "./App.tsx"
 import styles from "./NoteList.module.css"
+import {EditTagsModal} from "./EditTagsModal.tsx";
 
 type SimplifiedNote = {
     id: string
@@ -18,6 +19,7 @@ type NoteListProps = {
 export function NoteList({ availableTags, notes }: NoteListProps) {
     const [selectedTags, setSelectedTags] = useState<Tag[]>([])
     const [title, SetTitle] = useState("")
+    const [editTagsModalOpen, setEditTagsModalOpen] = useState(false)
 
     const filteredNotes = useMemo(() => {
         return notes.filter(note => {
@@ -71,7 +73,11 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
                         <Link to="/new">
                             <Button variant="primary">Create</Button>
                         </Link>
-                        <Button variant="outlined-secondary">Edit Tags</Button>
+                        <Button
+                            onClick={() => setEditTagsModalOpen(true)}
+                            variant="outlined-secondary">
+                            Edit Tags
+                        </Button>
                     </Stack>
                 </Col>
             </Row>
@@ -117,6 +123,10 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
                     </Col>
                 ))}
             </Row>
+            <EditTagsModal
+                show={editTagsModalOpen}
+                handleClose={() => setEditTagsModalOpen(false)}
+                availableTags={availableTags}/>
         </>
     )
 }
