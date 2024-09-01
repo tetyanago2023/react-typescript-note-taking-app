@@ -18,7 +18,7 @@ type NoteListProps = {
     onDeleteTag: (id: string) => void
     onUpdateTag: (id: string, label: string) => void
 }
-export function NoteList({ availableTags, notes }: NoteListProps) {
+export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }: NoteListProps) {
     const [selectedTags, setSelectedTags] = useState<Tag[]>([])
     const [title, SetTitle] = useState("")
     const [editTagsModalOpen, setEditTagsModalOpen] = useState(false)
@@ -128,7 +128,10 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
             <EditTagsModal
                 show={editTagsModalOpen}
                 handleClose={() => setEditTagsModalOpen(false)}
-                availableTags={availableTags}/>
+                availableTags={availableTags}
+                onUpdateTag={onUpdateTag}
+                onDeleteTag={onDeleteTag}
+            />
         </>
     )
 }
