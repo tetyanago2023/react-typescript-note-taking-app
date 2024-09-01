@@ -10,7 +10,7 @@ type EditTagsModalProps = {
 
 export function EditTagsModal({ availableTags, handleClose, show }: EditTagsModalProps) {
     return (
-        <Modal show={show} onhide={handleClose}>
+        <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Edit Tags</Modal.Title>
             </Modal.Header>
@@ -21,7 +21,6 @@ export function EditTagsModal({ availableTags, handleClose, show }: EditTagsModa
                             <Row key={tag.id}>
                                 <Col>
                                     <Form.Control type={"text"} value={tag.label} />
-
                                 </Col>
                                 <Col xs={"auto"}>
                                     <Button variant="outline-danger">&times;</Button>

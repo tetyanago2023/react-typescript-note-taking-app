@@ -15,6 +15,8 @@ type SimplifiedNote = {
 type NoteListProps = {
     availableTags: Tag[]
     notes: SimplifiedNote[]
+    onDeleteTag: (id: string) => void
+    onUpdateTag: (id: string, label: string) => void
 }
 export function NoteList({ availableTags, notes }: NoteListProps) {
     const [selectedTags, setSelectedTags] = useState<Tag[]>([])
